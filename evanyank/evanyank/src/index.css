@@ -1,11 +1,7 @@
-body {
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
+  height: 100%;
 }
 
 code {
@@ -15,10 +11,22 @@ code {
 
 .App{
   overflow-x: hidden;
-  overflow-y: hidden;
-  
+  overflow-y: scroll;
+  height: 100vh;
   color: #223843;
   font-family: 'Roboto', sans-serif;
+  scroll-snap-align: center;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+section{
+  margin: 0;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-align: start;
+  position: relative;
 }
 
 .gif img{
@@ -30,6 +38,7 @@ code {
   justify-content: center;
   align-items: center;
   background: black; 
+  scroll-snap-align: start;
 }
 
 .gif{
@@ -47,7 +56,7 @@ code {
 }
 
 .live-text {
-  
+  font-weight: 1000;
   margin: 0 auto;
   font-size: 2rem;
   font-family: 'Roboto', sans-serif;
@@ -92,8 +101,66 @@ code {
   display: flex;
   justify-content: center;
   height: 50px;
-  width: 70%;
+  width: 80%;
   backgroundColor: '#ddd';
   overflow: 'hidden';
   
+}
+
+.testimonials-section {
+  
+  height: 100vh;
+  scroll-snap-align: start;
+  background: #ADBBDA;
+  background: linear-gradient(180deg, rgba(173, 187, 218, 1) 0%, rgba(112, 145, 230, 1) 100%);  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.testimonials-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: 1rem;
+  scroll-behavior: smooth;
+}
+
+.testimonials-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.testimonials-container::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 3px;
+}
+
+.testimonials-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #4b3f72;
+  text-align: center;
+}
+
+.testimonial {
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+  background-color: #EDE8F5;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.testimonial p {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial span {
+  font-weight: bold;
+  color: #3D52A0;
 }
