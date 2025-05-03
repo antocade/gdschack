@@ -5,9 +5,94 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.App{
+  overflow-x: hidden;
+  overflow-y: hidden;
+  
+  color: #223843;
+  font-family: 'Roboto', sans-serif;
+}
+
+.gif img{
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black; 
+}
+
+.gif{
+  padding-bottom: 0px;
+}
+
+.live-score {
+  background: linear-gradient(180deg, rgba(112, 145, 230, 1) 0%, rgba(173, 187, 218, 1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.live-text {
+  
+  margin: 0 auto;
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.5); 
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 1000; 
+  backdrop-filter: blur(10px);
+  font-family: 'Roboto', sans-serif;
+  transition: top 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.navbar.hidden {
+  top: -60px;
+  opacity: 0;
+}
+
+.navbar.visible {
+  top: 0;
+  opacity: 1;
+}
+
+
+.progress-bar{
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  width: 70%;
+  backgroundColor: '#ddd';
+  overflow: 'hidden';
 }
