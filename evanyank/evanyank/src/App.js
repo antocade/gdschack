@@ -11,6 +11,7 @@ function ProgressBar({ value, max = 100 }) {
       width: '70%',
       backgroundColor: '#EDE8F5',
       overflow: 'hidden',
+      boxShadow: "1px 7px 15px .5px black",
     }}>
     
       <div style={{

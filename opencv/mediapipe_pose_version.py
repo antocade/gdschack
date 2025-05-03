@@ -51,7 +51,7 @@ def run_posture_analysis():
     pose = mp_pose.Pose()
     mp_drawing = mp.solutions.drawing_utils
 
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(0, cv2.CAP_AVFOUNDATION)
     while video_capture.isOpened(): 
 
         success, frame = video_capture.read()
@@ -93,10 +93,10 @@ def run_posture_analysis():
             cv2.putText(image, angle_text_string, (10, 30), font, 0.9, colour, 2)
             
             frame_num = frame_num + 1
-            if (frame_num % 60 == 0):
+            if (frame_num % 10 == 0):
                 sio.emit('postureScore', score)
                 print(score)
-                eventlet.sleep(1)
+                eventlet.sleep(0.02)
                 frame_num = 0
 
         
