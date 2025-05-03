@@ -32,5 +32,3 @@ while video_capture.isOpened():
 # Release the capture once all the processing is done. 
 video_capture.release()                                  
 cv2.destroyAllWindows() 
-
-
