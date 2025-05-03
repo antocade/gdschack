@@ -85,7 +85,7 @@ function App() {
         <div>JERK IT WORK IT</div>
       </div>
       <div className="gif">
-        <img src="./test.gif" />
+      <img src="http://localhost:6864/video_feed" width="640" height="480" />
       </div>
       <div className="live-score">
         <div className='live-text'>Live Posture Score: {score !== null ? score : "Waiting..."}</div>
