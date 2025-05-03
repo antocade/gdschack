@@ -6,6 +6,12 @@ import socketio
 import eventlet
 from flask import Flask, Response
 import threading
+import serial
+
+COM = 'COM3'
+BAUD = 9600
+
+ser = serial.Serial(COM, BAUD, timeout=.1)
 
 sio = socketio.Server(cors_allowed_origins='*')
 app_socket = socketio.WSGIApp(sio)
@@ -76,11 +82,20 @@ def run_posture_analysis():
             l_ear_x = int(results.pose_landmarks.landmark[LEFT_EAR].x * w)
             l_ear_y = int(results.pose_landmarks.landmark[LEFT_EAR].y * h)
             posture_angle = findAngle(l_shoulder_x, l_shoulder_y, l_ear_x, l_ear_y)
-            colour = red if posture_angle > EVIL_POSTURE_THRESHOLD else green
+            
+            if posture_angle > EVIL_POSTURE_THRESHOLD:
+                ser.write(1)
+                colour = red
+            else:
+                colour = green
+                ser.write(0)
+
             score = 100 - (((posture_angle - 10.0) / (90.0 - 10.0)) * 100)
             angle_text_string = "Angle: " + str(posture_angle) + " Score: " + str(score)
+
             cv2.line(image, (l_shoulder_x, l_shoulder_y), (l_ear_x, l_ear_y), colour, 4)
             cv2.putText(image, angle_text_string, (10, 30), font, 0.9, colour, 2)
+
             frame_num += 1
             if frame_num % 10 == 0:
                 sio.emit('postureScore', score)
