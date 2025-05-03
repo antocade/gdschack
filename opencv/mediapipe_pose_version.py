@@ -8,11 +8,11 @@ from flask import Flask, Response
 import threading
 import serial
 
-COM = 'COM3'
+COM = '/dev/cu.usbmodem11101' 
 BAUD = 9600
 
 ser = serial.Serial(COM, BAUD, timeout=.1)
-
+time.sleep(5)
 sio = socketio.Server(cors_allowed_origins='*')
 app_socket = socketio.WSGIApp(sio)
 app_flask = Flask(__name__)
@@ -84,7 +84,6 @@ def run_posture_analysis():
             posture_angle = findAngle(l_shoulder_x, l_shoulder_y, l_ear_x, l_ear_y)
             
             if posture_angle > EVIL_POSTURE_THRESHOLD:
-                ser.write(1)
                 colour = red
             else:
                 colour = green
@@ -102,6 +101,10 @@ def run_posture_analysis():
                 print(score)
                 eventlet.sleep(0.02)
                 frame_num = 0
+                if posture_angle > EVIL_POSTURE_THRESHOLD:
+                    ser.write("1".encode())
+                else:
+                    ser.write("0".encode())
 
         global output_frame, lock
         with lock:
